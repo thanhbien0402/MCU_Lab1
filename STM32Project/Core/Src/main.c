@@ -91,15 +91,47 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  char color = 'N';
   int counter = 0;
   while (1)
   {
 	  if (counter >= 10) counter = 0;
 	  display7SEG(counter++);
 	  HAL_Delay(1000);
+	  if (color == 'N'){
+		  HAL_GPIO_TogglePin(LED_YELLOW1_GPIO_Port, LED_YELLOW1_Pin);
+		  HAL_GPIO_TogglePin(LED_GREEN1_GPIO_Port, LED_GREEN1_Pin);
+		  HAL_GPIO_TogglePin(LED_RED2_GPIO_Port, LED_RED2_Pin);
+		  HAL_GPIO_TogglePin(LED_YELLOW2_GPIO_Port, LED_YELLOW2_Pin);
+		  color = 'R';
+	  }
+	  else if (color == 'R'){
+		  HAL_Delay(3000);
+		  HAL_GPIO_TogglePin(LED_GREEN2_GPIO_Port, LED_GREEN2_Pin);
+		  HAL_GPIO_TogglePin(LED_YELLOW2_GPIO_Port, LED_YELLOW2_Pin);
+		  HAL_Delay(2000);
+		  HAL_GPIO_TogglePin(LED_YELLOW2_GPIO_Port, LED_YELLOW2_Pin);
+		  HAL_GPIO_TogglePin(LED_RED2_GPIO_Port, LED_RED2_Pin);
+		  HAL_GPIO_TogglePin(LED_RED1_GPIO_Port, LED_RED1_Pin);
+		  HAL_GPIO_TogglePin(LED_GREEN1_GPIO_Port, LED_GREEN1_Pin);
+		  color = 'G';
+	  }
+	  else if (color == 'G'){
+		  HAL_Delay(3000);
+		  HAL_GPIO_TogglePin(LED_GREEN1_GPIO_Port, LED_GREEN1_Pin);
+		  HAL_GPIO_TogglePin(LED_YELLOW1_GPIO_Port, LED_YELLOW1_Pin);
+		  color = 'Y';
+	  }
+	  else if (color == 'Y'){
+		  HAL_Delay(2000);
+		  HAL_GPIO_TogglePin(LED_YELLOW1_GPIO_Port, LED_YELLOW1_Pin);
+		  HAL_GPIO_TogglePin(LED_RED1_GPIO_Port, LED_RED1_Pin);
+		  HAL_GPIO_TogglePin(LED_RED2_GPIO_Port, LED_RED2_Pin);
+		  HAL_GPIO_TogglePin(LED_GREEN2_GPIO_Port, LED_GREEN2_Pin);
+		  color = 'R';
+	  }
     /* USER CODE END WHILE */
-
-    /* USER CODE BEGIN 3 */
+  /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
 }
