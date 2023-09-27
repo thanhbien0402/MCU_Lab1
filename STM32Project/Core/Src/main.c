@@ -91,20 +91,36 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  int current_time = 0;
+  //int led_state = 0; // 0 for red, 1 for green, 2 for yellow
+  HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, SET);
+  HAL_GPIO_WritePin(LED_YELLOW_GPIO_Port, LED_YELLOW_Pin, RESET);
+  HAL_GPIO_WritePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin, RESET);
+
   while (1)
   {
-	  HAL_GPIO_TogglePin(LED_RED_GPIO_Port, LED_RED_Pin);
-	  HAL_Delay(5000);
-	  HAL_GPIO_TogglePin(LED_RED_GPIO_Port, LED_RED_Pin);
-	  HAL_GPIO_TogglePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin);
-	  HAL_Delay(3000);
-	  HAL_GPIO_TogglePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin);
-	  HAL_GPIO_TogglePin(LED_YELLOW_GPIO_Port, LED_YELLOW_Pin);
-	  HAL_Delay(2000);
-	  HAL_GPIO_TogglePin(LED_YELLOW_GPIO_Port, LED_YELLOW_Pin);
-    /* USER CODE END WHILE */
+    if (current_time < 5)
+    {
+      HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, SET);
+      HAL_GPIO_WritePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin, RESET);
+      HAL_GPIO_WritePin(LED_YELLOW_GPIO_Port, LED_YELLOW_Pin, RESET);
+    }
+    else if (current_time < 8)
+    {
+      HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, RESET);
+      HAL_GPIO_WritePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin, SET);
+      HAL_GPIO_WritePin(LED_YELLOW_GPIO_Port, LED_YELLOW_Pin, RESET);
+    }
+    else if (current_time < 10)
+    {
+      HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, RESET);
+      HAL_GPIO_WritePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin, RESET);
+      HAL_GPIO_WritePin(LED_YELLOW_GPIO_Port, LED_YELLOW_Pin, SET);
+    }
 
-    /* USER CODE BEGIN 3 */
+    HAL_Delay(1000); // Wait for 1 second
+    current_time++;
+    if (current_time >= 10) current_time = 0; // Reset the timer for the next cycle
   }
   /* USER CODE END 3 */
 }
