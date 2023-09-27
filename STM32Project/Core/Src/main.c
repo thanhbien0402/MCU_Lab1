@@ -48,6 +48,7 @@
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
+void clearAllClock();
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -86,7 +87,6 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   /* USER CODE BEGIN 2 */
-  void clearAllClock();
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -167,8 +167,8 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+uint16_t LED_PIN[] = {LED0_Pin, LED1_Pin, LED2_Pin, LED3_Pin, LED4_Pin, LED5_Pin, LED6_Pin, LED7_Pin, LED8_Pin, LED9_Pin, LED10_Pin, LED11_Pin};
 void clearAllClock(){
-	uint16_t LED_PIN[] = {LED0_Pin, LED1_Pin, LED2_Pin, LED3_Pin, LED4_Pin, LED5_Pin, LED6_Pin, LED7_Pin, LED8_Pin, LED9_Pin, LED10_Pin, LED11_Pin};
 	for (int i = 0; i < 12; i++){
 		HAL_GPIO_WritePin(GPIOA, LED_PIN[i], RESET);
 	}
